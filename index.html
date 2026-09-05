@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Mirada Garage Utility Review | Thermal Diagnostics & Infrastructure Safeguards</title>
+    <meta name="description" content="Technical guide and inspection journal on tank corrosion, thermal expansion spikes, and pressure valve maintenance in La Mirada residential garages.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 
+           DESIGN SYSTEM: "Industrial Thermal Brutalism"
+           Color Palette: Raw Vulcan Obsidian (#0D0E12), Rust Ochre (#D96B27), Industrial Copper (#C85A32), Anodized Brass (#E5A93C), Cool Concrete (#181A20), Sandstone Paper (#F1EFEA)
+           Layout Strategy: Asymmetric Split View, Overlapping Diagonal Viewports, Tactile Industrial Cards, Exposed Technical Borders.
+        */
+        :root {
+            --bg-dark: #0D0E12;
+            --bg-surface: #14161D;
+            --bg-surface-elevated: #1D202A;
+            --primary-rust: #D96B27;
+            --primary-copper: #C85A32;
+            --accent-brass: #E5A93C;
+            --text-light: #F1EFEA;
+            --text-muted: #9E9EA0;
+            --border-tech: rgba(217, 107, 39, 0.25);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --font-head: 'Syne', sans-serif;
+            --font-body: 'Space Grotesk', sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.65;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 80% 10%, rgba(217, 107, 39, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 10% 80%, rgba(229, 169, 60, 0.04) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: var(--font-head);
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            color: var(--text-light);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1360px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        .section-padding {
+            padding: 130px 0;
+            position: relative;
+        }
+
+        /* INDUSTRIAL TAGS & HEADINGS */
+        .tech-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 14px;
+            background: rgba(217, 107, 39, 0.12);
+            border: 1px solid var(--border-tech);
+            color: var(--primary-rust);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+        }
+
+        .tech-tag::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--primary-rust);
+            box-shadow: 0 0 8px var(--primary-rust);
+        }
+
+        .main-headline {
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+        }
+
+        .main-headline span {
+            color: var(--primary-rust);
+            background: linear-gradient(135deg, var(--primary-rust), var(--accent-brass));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* BUTTONS */
+        .btn-industrial {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 36px;
+            background: var(--primary-rust);
+            color: #0D0E12;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: 1px solid var(--primary-rust);
+            cursor: pointer;
+            box-shadow: 6px 6px 0px rgba(229, 169, 60, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .btn-industrial:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 9px 9px 0px rgba(229, 169, 60, 0.5);
+            background: var(--accent-brass);
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 36px;
+            background: transparent;
+            color: var(--text-light);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: 1px solid var(--border-tech);
+            transition: all 0.2s ease;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary-rust);
+            color: var(--primary-rust);
+            background: rgba(217, 107, 39, 0.05);
+        }
+
+        /* 1. STICKY NAV BAR */
+        .site-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(13, 14, 18, 0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 90px;
+        }
+
+        .brand-block {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .brand-symbol {
+            width: 44px;
+            height: 44px;
+            background: var(--bg-surface-elevated);
+            border: 1px solid var(--primary-rust);
+            display: grid;
+            place-items: center;
+            color: var(--accent-brass);
+            font-family: var(--font-head);
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        .brand-text h2 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+        }
+
+        .brand-text span {
+            font-size: 0.7rem;
+            color: var(--primary-rust);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-brass);
+        }
+
+        /* 2. DYNAMIC HERO SECTION */
+        .hero-section {
+            padding-top: 190px;
+            padding-bottom: 110px;
+        }
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-title-box h1 {
+            font-size: 4.2rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            line-height: 1.05;
+        }
+
+        .hero-title-box p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 620px;
+        }
+
+        .hero-media-wrapper {
+            position: relative;
+            padding: 16px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-tech);
+        }
+
+        .hero-media-wrapper img {
+            width: 100%;
+            height: 520px;
+            object-fit: cover;
+            filter: contrast(105%) brightness(95%);
+        }
+
+        .hero-floating-badge {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            background: var(--bg-surface-elevated);
+            border: 1px solid var(--primary-rust);
+            padding: 24px;
+            max-width: 260px;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.5);
+        }
+
+        /* 3. QUICK STATS GRID */
+        .stats-section {
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 60px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+
+        .stat-item {
+            border-left: 2px solid var(--primary-rust);
+            padding-left: 24px;
+        }
+
+        .stat-num {
+            font-family: var(--font-head);
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--accent-brass);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .stat-desc {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+        }
+
+        /* 4. PLATFORM OVERVIEW / EDITORIAL MISSION */
+        .mission-split {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .mission-callout {
+            background: linear-gradient(180deg, var(--bg-surface), var(--bg-surface-elevated));
+            border: 1px solid var(--border-tech);
+            padding: 50px;
+            position: relative;
+        }
+
+        .mission-callout::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 40px 40px 0;
+            border-color: transparent var(--primary-rust) transparent transparent;
+        }
+
+        /* 5. MAIN FEATURED ARTICLE SECTION */
+        .article-frame {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            padding: 80px;
+            max-width: 1060px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .article-frame::before {
+            content: 'TECHNICAL JOURNAL // REGION 90638';
+            position: absolute;
+            top: -12px;
+            left: 40px;
+            background: var(--primary-rust);
+            color: #0D0E12;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 12px;
+            letter-spacing: 2px;
+        }
+
+        .article-header {
+            margin-bottom: 50px;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 40px;
+        }
+
+        .article-headline {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-top: 16px;
+            margin-bottom: 24px;
+        }
+
+        .article-meta-line {
+            display: flex;
+            gap: 30px;
+            font-size: 0.85rem;
+            color: var(--primary-rust);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .article-content {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: #D1D1D6;
+        }
+
+        .article-content p {
+            margin-bottom: 32px;
+        }
+
+        .article-content h3 {
+            font-size: 1.8rem;
+            color: var(--text-light);
+            margin: 50px 0 20px 0;
+            padding-left: 16px;
+            border-left: 3px solid var(--accent-brass);
+        }
+
+        .article-quote {
+            background: var(--bg-surface-elevated);
+            border: 1px solid var(--border-tech);
+            padding: 36px;
+            margin: 40px 0;
+            font-family: var(--font-head);
+            font-size: 1.35rem;
+            color: var(--accent-brass);
+        }
+
+        .seo-link-primary {
+            color: var(--accent-brass);
+            font-weight: 700;
+            border-bottom: 2px solid var(--primary-rust);
+            padding-bottom: 2px;
+        }
+
+        .seo-link-primary:hover {
+            background: var(--primary-rust);
+            color: #0D0E12;
+        }
+
+        .seo-link-authority {
+            color: var(--primary-rust);
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        /* 6. CORE FEATURES GRID */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .feature-box {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            padding: 44px 36px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .feature-box:hover {
+            border-color: var(--primary-rust);
+            transform: translateY(-6px);
+            background: var(--bg-surface-elevated);
+        }
+
+        .feature-num {
+            font-family: var(--font-head);
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-rust);
+            margin-bottom: 20px;
+        }
+
+        /* 7. ARCHITECTURE GUIDE / TIMELINE */
+        .step-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            position: relative;
+        }
+
+        .step-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            padding: 32px 24px;
+            position: relative;
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--border-subtle);
+        }
+
+        .step-card.active::before {
+            background: var(--primary-rust);
+        }
+
+        /* 8. COMPARISON TABLE */
+        .matrix-table-wrapper {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            overflow: hidden;
+        }
+
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .matrix-table th {
+            background: var(--bg-surface-elevated);
+            padding: 24px 32px;
+            font-family: var(--font-head);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-brass);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .matrix-table td {
+            padding: 22px 32px;
+            border-bottom: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+        }
+
+        .matrix-table tr:hover td {
+            background: rgba(255,255,255,0.02);
+            color: var(--text-light);
+        }
+
+        /* 9. FAQ ACCORDION */
+        .faq-wrap {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-node {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            margin-bottom: 16px;
+        }
+
+        .faq-trigger {
+            width: 100%;
+            padding: 28px 36px;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-family: var(--font-head);
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .faq-symbol {
+            font-size: 1.5rem;
+            color: var(--primary-rust);
+        }
+
+        .faq-drawer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 36px;
+            color: var(--text-muted);
+        }
+
+        .faq-node.active {
+            border-color: var(--primary-rust);
+        }
+
+        .faq-node.active .faq-drawer {
+            max-height: 220px;
+            padding-bottom: 30px;
+        }
+
+        /* 10. EXPERT TIPS CARDS */
+        .tips-trio {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .tip-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            padding: 40px;
+            position: relative;
+        }
+
+        .tip-card::before {
+            content: 'INSPECTION TIP';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 0.65rem;
+            color: var(--primary-rust);
+            letter-spacing: 1.5px;
+            font-weight: 700;
+        }
+
+        /* 11. TESTIMONIALS SHOWCASE */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .review-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .review-quote {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .review-user {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .review-user img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid var(--primary-rust);
+        }
+
+        /* 12. RESOURCE BANNER */
+        .callout-banner {
+            background: linear-gradient(135deg, var(--bg-surface-elevated), #261912);
+            border: 1px solid var(--border-tech);
+            padding: 70px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* 13. FORM SECTION */
+        .form-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .form-box {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            padding: 50px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--primary-rust);
+            margin-bottom: 10px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 16px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-light);
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-rust);
+        }
+
+        /* 14. FOOTER */
+        .site-footer {
+            background: #08090C;
+            border-top: 1px solid var(--border-subtle);
+            padding: 90px 0 40px 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 50px;
+            margin-bottom: 70px;
+        }
+
+        .footer-col-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary-rust);
+            margin-bottom: 24px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 14px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-brass);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* RESPONSIVE BREAKPOINTS */
+        @media (max-width: 1100px) {
+            .hero-layout, .mission-split, .form-split {
+                grid-template-columns: 1fr;
+            }
+            .features-grid, .tips-trio, .reviews-grid, .step-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hero-title-box h1 {
+                font-size: 2.8rem;
+            }
+            .main-headline {
+                font-size: 2.2rem;
+            }
+            .article-frame {
+                padding: 30px 20px;
+            }
+            .article-headline {
+                font-size: 2rem;
+            }
+            .features-grid, .tips-trio, .reviews-grid, .stats-grid, .footer-grid, .step-list {
+                grid-template-columns: 1fr;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. MODERN STICKY NAVIGATION BAR -->
+    <header class="site-nav">
+        <div class="container">
+            <div class="nav-container">
+                <a href="#" class="brand-block">
+                    <div class="brand-symbol">G</div>
+                    <div class="brand-text">
+                        <h2>LA MIRADA GARAGE</h2>
+                        <span>Utility &amp; Thermal Review</span>
+                    </div>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#journal">Technical Journal</a></li>
+                    <li><a href="#failures">Failure Modes</a></li>
+                    <li><a href="#diagnostics">Diagnostics</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+                <a href="#consult" class="btn-industrial" style="padding: 12px 24px; font-size: 0.8rem;">Dispatch Audit</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. DYNAMIC HERO SECTION -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-layout">
+                <div class="hero-title-box">
+                    <div class="tech-tag">Engineering Field Review 2026</div>
+                    <h1>Mitigating Tank Corrosion &amp; <span>Pressure Valve Spikes</span></h1>
+                    <p>An authoritative utility infrastructure journal examining mineral scale accumulation, relief valve fatigue, and thermal expansion dynamics in Southern California residential garages.</p>
+                    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                        <a href="#journal" class="btn-industrial">Read Full Report</a>
+                        <a href="#diagnostics" class="btn-outline">Diagnostic Checklist</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="hero-media-wrapper">
+                        <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=1000&q=80" alt="Industrial Water Heater Engineering Inspection">
+                        <div class="hero-floating-badge">
+                            <div style="font-family: var(--font-head); font-size: 2rem; font-weight: 800; color: var(--accent-brass);">150+ PSI</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Uncontrolled Thermal Spike Danger</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. QUICK STATS & ACHIEVEMENTS GRID -->
+    <div class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-num">140°F</div>
+                    <div class="stat-desc">Standard Tank Operating Temp</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">3/8"</div>
+                    <div class="stat-desc">Max Annual Mineral Scale Crust</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">100%</div>
+                    <div class="stat-desc">Thermal Imaging Isolation</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">24/7</div>
+                    <div class="stat-desc">Emergency Containment Response</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. PLATFORM OVERVIEW / EDITORIAL MISSION -->
+    <section class="section-padding" id="overview">
+        <div class="container">
+            <div class="mission-split">
+                <div>
+                    <div class="tech-tag">Platform Mission</div>
+                    <h2 class="main-headline">Safeguarding La Mirada <span>Residential Storage</span></h2>
+                    <p style="color: var(--text-muted); font-size: 1.1rem;">La Mirada Garage Utility Review delivers unbiased hydraulic diagnostics, thermal analysis, and preventative engineering insights directly to local property managers and homeowners.</p>
+                </div>
+                <div class="mission-callout">
+                    <p style="font-size: 1.2rem; color: var(--text-light); margin-bottom: 20px; font-weight: 600;">Enclosed utility closets and residential attached garages house pressurized thermal vessels that operate continuously under high municipal baseline pressure.</p>
+                    <p style="color: var(--text-muted); font-size: 0.98rem;">Our ongoing field audits highlight critical vulnerabilities caused by hard water mineral crusts, depleted sacrificial anode rods, and failed expansion tanks. By educating residents on subtle warning signs, we eliminate sudden structural tank breaches and catastrophic garage floor inundation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. MAIN FEATURED ARTICLE SECTION -->
+    <section class="section-padding" id="journal" style="background: rgba(255, 255, 255, 0.01);">
+        <div class="container">
+            <article class="article-frame">
+                <header class="article-header">
+                    <div class="tech-tag">Featured Infrastructure Analysis</div>
+                    <h1 class="article-headline">Mitigating Tank Corrosion and Pressure Valve Spikes in La Mirada Garages</h1>
+                    <div class="article-meta-line">
+                        <span>Author: Engineering Diagnostics Desk</span>
+                        <span>&bull;</span>
+                        <span>Location: La Mirada, CA</span>
+                    </div>
+                </header>
+
+                <div class="article-content">
+                    <p>Unfiltered water containing heavy mineral content causes rapid sediment buildup inside residential water heaters operating in La Mirada garages and utility closets. As hard municipal tap water cycles through repeated heating loops, dissolved calcium carbonate and magnesium ions precipitate out of solution, settling along the internal base of glass-lined steel tanks. Over months of uninterrupted heat cycles, this sediment crystallizes into a solid thermal barrier, trapping extreme heat beneath the tank bed and accelerating internal metal fatigue.</p>
+
+                    <p>Corrosive internal scale causes sudden tank shell failures, rusted relief valves, and overnight garage flooding that destroys personal storage. When sediment insulates the bottom tank floor, burner assemblies or electric heating elements must run significantly longer to reach thermostat set points. This prolonged thermal exposure degrades the sacrificial anode rod prematurely, exposing vulnerable internal welds to galvanic oxidation and localized pitting.</p>
+
+                    <div class="article-quote">
+                        "When thermal expansion valves seize from calcification, baseline garage plumbing pressure can spike beyond safe operating thresholds in minutes."
+                    </div>
+
+                    <h3>Thermal Pressure Surges &amp; Relief Valve Corrosion</h3>
+                    <p>Beyond internal sediment accumulation, thermal expansion represents an equal structural hazard within closed municipal water networks. As water warms from 50°F to 120°F, it expands in volume by nearly two percent. If backflow preventers or check valves are installed at the main utility meter, expanded water has nowhere to go. Without a functional, properly charged expansion tank, internal hydraulic pressure spikes dramatically.</p>
+
+                    <p>The Temperature and Pressure Relief (T&amp;P) valve serves as the ultimate safety failsafe against excessive pressure. However, mineral-laden water often forms heavy crusts around the valve seat, locking the spring-loaded plunger in place. When a seized T&amp;P valve meets a high-pressure surge, water forces its way through the weakest seam on the tank, resulting in total structural containment failure.</p>
+
+                    <h3>Preventative Flushing &amp; Diagnostic Protocol</h3>
+                    <p>Flush-servicing heating tanks annually and conducting thermal inspections on supply lines helps homeowners avoid unexpected utility room flooding. A thorough annual flush removes un-calcified loose sediment before it hardens into an impenetrable insulating shell. Additionally, testing the T&amp;P valve lever manually confirms that internal seats open freely without binding.</p>
+
+                    <p>Homeowners dealing with leaking storage tanks can request <a href="https://lamiradaleakrepairpros.com/services/water-heater-leak-detection-repair" class="seo-link-primary" target="_blank" rel="noopener">water heater leak repair La Mirada</a> to secure emergency plumbing assistance. Professional technicians utilize high-definition thermal imaging cameras to identify hidden micro-fissures, failing supply line unions, and internal tank liner breaches long before structural rupture occurs.</p>
+
+                    <h3>Regulatory Standards &amp; Long-Term Protection</h3>
+                    <p>According to safety mandates set forth by the <a href="https://www.iapmo.org/" class="seo-link-authority" target="_blank" rel="noopener">International Association of Plumbing and Mechanical Officials (IAPMO)</a>, residential water heating vessels must maintain functional pressure-relieving devices and adequate seismically rated restraint strapping. Regulatory overview guidelines provided by <a href="https://www.energy.ca.gov/" class="seo-link-authority" target="_blank" rel="noopener">California Energy Commission</a> further highlight that eliminating tank scale reduces household utility costs while conserving energy reserves.</p>
+
+                    <p>Proper maintenance drastically extends water heater performance while preventing interior residential water damage. By remaining vigilant against hard water mineral crusts and replacing worn anode rods every three to five years, property owners safeguard both their utility investments and private storage spaces.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- 6. CORE FEATURES & KEY VALUE GRID -->
+    <section class="section-padding" id="failures">
+        <div class="container">
+            <div style="margin-bottom: 60px;">
+                <div class="tech-tag">Diagnostic Matrix</div>
+                <h2 class="main-headline">6 Critical <span>Garage Utility Vulnerabilities</span></h2>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-box">
+                    <div class="feature-num">01</div>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 12px;">Calcified Tank Base</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Hard water sediment forming an insulating shell that overheats lower steel welds.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-num">02</div>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 12px;">Seized T&amp;P Plunger</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Mineral buildup immobilizing safety relief valves during thermal pressure surges.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-num">03</div>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 12px;">Depleted Anode Rod</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Exhausted sacrificial core allowing direct galvanic corrosion on tank inner walls.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-num">04</div>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 12px;">Flexible Hose Fatigue</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Corroded copper flex lines snapping under excessive garage vibration.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-num">05</div>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 12px;">Ruptured Bladder Tank</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Loss of air pre-charge in thermal expansion vessels spiking baseline pressure.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-num">06</div>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 12px;">Dielectric Nipple Decay</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Galvanic action between dissimilar metals eroding cold water intake unions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. ARCHITECTURE GUIDE / TIMELINE -->
+    <section class="section-padding" id="diagnostics" style="background: rgba(255, 255, 255, 0.01);">
+        <div class="container">
+            <div style="margin-bottom: 60px; text-align: center;">
+                <div class="tech-tag">Preventative Protocol</div>
+                <h2 class="main-headline">4-Step Tank <span>Maintenance Workflow</span></h2>
+            </div>
+
+            <div class="step-list">
+                <div class="step-card active">
+                    <div style="font-family: var(--font-head); font-size: 1.2rem; color: var(--primary-rust); margin-bottom: 10px;">STAGE 01</div>
+                    <h4 style="font-size: 1.1rem; margin-bottom: 10px;">Anode Rod Audit</h4>
+                    <p style="color: var(--text-muted); font-size: 0.88rem;">Extract and inspect the sacrificial rod for core wire exposure or heavy pitting.</p>
+                </div>
+                <div class="step-card">
+                    <div style="font-family: var(--font-head); font-size: 1.2rem; color: var(--primary-rust); margin-bottom: 10px;">STAGE 02</div>
+                    <h4 style="font-size: 1.1rem; margin-bottom: 10px;">Full Sediment Flush</h4>
+                    <p style="color: var(--text-muted); font-size: 0.88rem;">Attach drain hose to bottom spigot and flush until mineral slurry clears entirely.</p>
+                </div>
+                <div class="step-card">
+                    <div style="font-family: var(--font-head); font-size: 1.2rem; color: var(--primary-rust); margin-bottom: 10px;">STAGE 03</div>
+                    <h4 style="font-size: 1.1rem; margin-bottom: 10px;">T&amp;P Lever Actuation</h4>
+                    <p style="color: var(--text-muted); font-size: 0.88rem;">Trip the relief valve lever manually to verify instant water discharge and reseal.</p>
+                </div>
+                <div class="step-card">
+                    <div style="font-family: var(--font-head); font-size: 1.2rem; color: var(--primary-rust); margin-bottom: 10px;">STAGE 04</div>
+                    <h4 style="font-size: 1.1rem; margin-bottom: 10px;">Expansion Vessel PSI</h4>
+                    <p style="color: var(--text-muted); font-size: 0.88rem;">Measure air valve pressure on expansion tank to match household water inlet PSI.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. COMPREHENSIVE COMPARISON TABLE -->
+    <section class="section-padding">
+        <div class="container">
+            <div style="margin-bottom: 50px;">
+                <div class="tech-tag">System Comparison</div>
+                <h2 class="main-headline">Healthy vs. <span>Degraded Water Vessel</span></h2>
+            </div>
+
+            <div class="matrix-table-wrapper">
+                <table class="matrix-table">
+                    <thead>
+                        <tr>
+                            <th>Diagnostic Parameter</th>
+                            <th>Optimal Operating Tank</th>
+                            <th>Failing / Corroded Tank</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Operational Noise</strong></td>
+                            <td>Silent heating cycle</td>
+                            <td><span style="color: var(--primary-rust); font-weight: 700;">Popping / Rumbling (Sediment Boil)</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Water Clarity</strong></td>
+                            <td>Clear, odorless discharge</td>
+                            <td><span style="color: var(--primary-rust); font-weight: 700;">Rusty tint, metallic odor</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>T&amp;P Valve Seat</strong></td>
+                            <td>Clean steel plunger, no residue</td>
+                            <td><span style="color: var(--primary-rust); font-weight: 700;">Crusted calcium corrosion crust</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Recovery Time</strong></td>
+                            <td>30-45 minutes max</td>
+                            <td><span style="color: var(--primary-rust); font-weight: 700;">90+ minutes (Insulated bottom)</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Flood Hazard</strong></td>
+                            <td><span style="color: #10B981; font-weight: 700;">Minimal Risk</span></td>
+                            <td><span style="color: var(--primary-rust); font-weight: 700;">Critical Breach Risk</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. INTERACTIVE FAQ SECTION -->
+    <section class="section-padding" id="faq" style="background: rgba(255, 255, 255, 0.01);">
+        <div class="container">
+            <div style="margin-bottom: 50px; text-align: center;">
+                <div class="tech-tag">Information Center</div>
+                <h2 class="main-headline">Frequently Asked <span>Utility Questions</span></h2>
+            </div>
+
+            <div class="faq-wrap">
+                <div class="faq-node">
+                    <button class="faq-trigger">
+                        <span>Why does my water heater make popping sounds in the garage?</span>
+                        <span class="faq-symbol">+</span>
+                    </button>
+                    <div class="faq-drawer">
+                        <p>Popping or rumbling noises occur when steam bubbles force their way through heavy mineral sediment trapped at the bottom of the tank. It indicates severe scale accumulation that requires immediate flushing.</p>
+                    </div>
+                </div>
+
+                <div class="faq-node">
+                    <button class="faq-trigger">
+                        <span>How often should the sacrificial anode rod be replaced?</span>
+                        <span class="faq-symbol">+</span>
+                    </button>
+                    <div class="faq-drawer">
+                        <p>In La Mirada's hard water environment, anode rods should be inspected every 2 years and replaced every 3 to 5 years before galvanic corrosion attacks the steel tank shell.</p>
+                    </div>
+                </div>
+
+                <div class="faq-node">
+                    <button class="faq-trigger">
+                        <span>What causes a relief valve to drip water constantly?</span>
+                        <span class="faq-symbol">+</span>
+                    </button>
+                    <div class="faq-drawer">
+                        <p>Constant dripping usually signals either excessive household water pressure (over 80 PSI), a failed expansion tank bladder, or calcified debris preventing the valve seat from closing tightly.</p>
+                    </div>
+                </div>
+
+                <div class="faq-node">
+                    <button class="faq-trigger">
+                        <span>Is a water heater drain pan required in an attached garage?</span>
+                        <span class="faq-symbol">+</span>
+                    </button>
+                    <div class="faq-drawer">
+                        <p>Yes. Plumbing codes require an approved drain pan with a dedicated discharge pipe leading outdoors or to an approved drain to prevent garage floor and drywall damage during a tank leak.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. EXPERT TIPS CARDS -->
+    <section class="section-padding">
+        <div class="container">
+            <div style="margin-bottom: 50px;">
+                <div class="tech-tag">Engineering Advice</div>
+                <h2 class="main-headline">Best Practices for <span>Homeowners</span></h2>
+            </div>
+
+            <div class="tips-trio">
+                <div class="tip-card">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 12px; color: var(--accent-brass);">Install Pressure Regulator</h3>
+                    <p style="color: var(--text-muted); font-size: 0.92rem;">Ensure your municipal water pressure regulator keeps inlet pressure below 65 PSI to protect supply line flex hoses.</p>
+                </div>
+                <div class="tip-card">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 12px; color: var(--accent-brass);">Elevate Appliance Base</h3>
+                    <p style="color: var(--text-muted); font-size: 0.92rem;">Keep gas water heaters elevated 18 inches off the garage floor to comply with safety codes regarding flammable vapors.</p>
+                </div>
+                <div class="tip-card">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 12px; color: var(--accent-brass);">Test Emergency Shutoff</h3>
+                    <p style="color: var(--text-muted); font-size: 0.92rem;">Exercise the cold water inlet ball valve once a year to verify it closes completely in an overnight emergency leak.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. USER FEEDBACK SHOWCASE -->
+    <section class="section-padding" style="background: rgba(255, 255, 255, 0.01);">
+        <div class="container">
+            <div style="margin-bottom: 50px;">
+                <div class="tech-tag">Local Testimonials</div>
+                <h2 class="main-headline">La Mirada Resident <span>Case Notes</span></h2>
+            </div>
+
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <p class="review-quote">"Woke up to a sizzling sound in our garage. Thanks to the diagnostic tips here, I caught a leaking relief valve before it ruined our stored holiday boxes."</p>
+                    <div class="review-user">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Resident">
+                        <div>
+                            <h4 style="font-size: 0.95rem; font-weight: 700;">David Reynolds</h4>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">Foster Park Area</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <p class="review-quote">"The article explaining thermal expansion spikes was spot on. Our expansion tank was completely waterlogged. Replacing it saved our new water heater."</p>
+                    <div class="review-user">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Resident">
+                        <div>
+                            <h4 style="font-size: 0.95rem; font-weight: 700;">Christine Hayes</h4>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">La Mirada Heights</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <p class="review-quote">"A professional flushing removed two buckets of white sediment slurry from our 6-year-old tank. The popping sounds disappeared immediately!"</p>
+                    <div class="review-user">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Resident">
+                        <div>
+                            <h4 style="font-size: 0.95rem; font-weight: 700;">Greg Thompson</h4>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">Green Hills Neighborhood</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. HIGHLIGHTED RESOURCE BANNER -->
+    <div class="container" style="margin-bottom: 120px;">
+        <div class="callout-banner">
+            <h2 style="font-size: 2.5rem; margin-bottom: 16px;">Order a Professional Utility Room Inspection</h2>
+            <p style="color: var(--text-muted); max-width: 650px; margin: 0 auto 30px auto; font-size: 1.05rem;">Isolate hidden thermal stress, test pressure relief systems, and clear sediment crusts before structural tank failure occurs.</p>
+            <a href="#consult" class="btn-industrial">Schedule Thermal Audit</a>
+        </div>
+    </div>
+
+    <!-- 13. CONSULTATION FORM SECTION -->
+    <section class="section-padding" id="consult" style="background: rgba(255, 255, 255, 0.02);">
+        <div class="container">
+            <div class="form-split">
+                <div>
+                    <div class="tech-tag">Audit Request</div>
+                    <h2 class="main-headline">Schedule a Garage <span>Thermal Assessment</span></h2>
+                    <p style="color: var(--text-muted); margin-bottom: 30px;">Connect with certified plumbing engineers for comprehensive tank diagnostic evaluations across La Mirada.</p>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <strong style="color: var(--primary-rust); display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Editorial Office:</strong>
+                        <span style="color: var(--text-muted);">editor@lamiradagarageutilityreview.com</span>
+                    </div>
+                    <div>
+                        <strong style="color: var(--primary-rust); display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Coverage Area:</strong>
+                        <span style="color: var(--text-muted);">La Mirada, CA &amp; Adjacent Utility Corridors</span>
+                    </div>
+                </div>
+
+                <div class="form-box">
+                    <form onsubmit="event.preventDefault(); alert('Inspection inquiry logged successfully! A technical representative will follow up.');">
+                        <h3 style="font-size: 1.3rem; margin-bottom: 24px;">Submit Inspection Details</h3>
+                        <div class="form-group">
+                            <label for="fname">Homeowner Name</label>
+                            <input type="text" id="fname" class="form-input" placeholder="e.g. Robert Miller" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="femail">Email Address</label>
+                            <input type="email" id="femail" class="form-input" placeholder="e.g. robert@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="fage">Water Heater Age (Years)</label>
+                            <select id="fage" class="form-input">
+                                <option>0 - 3 Years (Under Warranty)</option>
+                                <option>4 - 7 Years (Flush Recommended)</option>
+                                <option>8 - 12 Years (Critical Inspection Needed)</option>
+                                <option>12+ Years (Replacement Assessment)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="fnotes">Observed Symptoms</label>
+                            <textarea id="fnotes" class="form-input" style="min-height: 100px; resize: vertical;" placeholder="Describe water discoloration, rumbling noises, or relief valve drips..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-industrial" style="width: 100%; justify-content: center;">Dispatch Inspection Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 14. COMPREHENSIVE FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3 style="color: var(--text-light); font-family: var(--font-head); font-size: 1.1rem; margin-bottom: 16px;">LA MIRADA GARAGE UTILITY REVIEW</h3>
+                    <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.7;">A specialized digital portal evaluating garage thermal safety, relief valve integrity, and municipal water heating infrastructure in Southern California residences.</p>
+                </div>
+                <div>
+                    <div class="footer-col-title">SECTIONS</div>
+                    <ul class="footer-links">
+                        <li><a href="#overview">Mission Statement</a></li>
+                        <li><a href="#journal">Technical Journal</a></li>
+                        <li><a href="#failures">Failure Modes</a></li>
+                        <li><a href="#diagnostics">4-Step Workflow</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-col-title">TOPICS</div>
+                    <ul class="footer-links">
+                        <li><a href="#journal">Sediment Crusts</a></li>
+                        <li><a href="#journal">Thermal Expansion</a></li>
+                        <li><a href="#diagnostics">Anode Replacement</a></li>
+                        <li><a href="#diagnostics">T&amp;P Safety Valves</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-col-title">DISTRICTS</div>
+                    <ul class="footer-links">
+                        <li><a href="#">La Mirada Estates</a></li>
+                        <li><a href="#">Creek Park Area</a></li>
+                        <li><a href="#">Foster Road Corridor</a></li>
+                        <li><a href="#">Imperial Highway District</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>&copy; 2026 La Mirada Garage Utility Review. All rights reserved. Thermal Safeguard Journal.</div>
+                <div style="display: flex; gap: 24px;">
+                    <a href="#" style="color: var(--text-muted);">Privacy Policy</a>
+                    <a href="#" style="color: var(--text-muted);">Engineering Standards</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MINIMAL VANILLA JS FOR ACCORDION & NAV SCRIPTS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Accordion
+            const faqNodes = document.querySelectorAll('.faq-node');
+            faqNodes.forEach(node => {
+                const trigger = node.querySelector('.faq-trigger');
+                trigger.addEventListener('click', () => {
+                    const isActive = node.classList.contains('active');
+                    faqNodes.forEach(n => n.classList.remove('active'));
+                    if (!isActive) {
+                        node.classList.add('active');
+                    }
+                });
+            });
+
+            // Hide/Show Sticky Nav on Scroll
+            let prevScroll = window.pageYOffset;
+            const nav = document.querySelector('.site-nav');
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset;
+                if (currentScroll > prevScroll && currentScroll > 120) {
+                    nav.style.transform = 'translateY(-100%)';
+                } else {
+                    nav.style.transform = 'translateY(0)';
+                }
+                prevScroll = currentScroll;
+            });
+        });
+    </script>
+</body>
+</html>
